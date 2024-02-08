@@ -1,6 +1,6 @@
 # clfreader
 
-Reads [Common Log Format](https://en.wikipedia.org/wiki/Common_Log_Format#:~:text=For%20computer%20log%20management%2C%20the,when%20generating%20server%20log%20files.) files and converts to different formats. 
+Reads [Combined Log Format](https://en.wikipedia.org/wiki/Common_Log_Format#:~:text=For%20computer%20log%20management%2C%20the,when%20generating%20server%20log%20files.) files and converts to something useful. 
 
 ![Under Construction](https://media.tenor.com/MRCIli40TYoAAAAi/under-construction90s-90s.gif)
 
