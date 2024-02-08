@@ -35,6 +35,11 @@ class CLFReader:
         self.df = pd.DataFrame(self.logs)
         self.df.columns = ["ip_address", "rfc_id", "user_id", "date_time_tz", "request_line",
                           "status_code", "response_size", "referrer", "user_agent"]
+        datetime_format = "%d/%b/%Y:%H:%M:%S %z"
+        date_time_objs = pd.to_datetime(self.df.date_time_tz, format=datetime_format)
+        self.df.set_index(date_time_objs, inplace=True)
+        del self.df["date_time_tz"]
+
         
     def to_json(self):
         pass 
