@@ -1,6 +1,7 @@
 """
 A class that reads a text file in Common Log Format and converts to different formats
 """
+import pandas as pd 
 
 class CLFReader:
 
@@ -9,26 +10,33 @@ class CLFReader:
         """
         receives a single line of CLF file and returns tuple of items
         """
-        item1, residual = log.split(" ", 1)
-        item2, residual = residual.split(" ", 1)
-        item3, residual = residual.split(" ", 1)
-        item4, residual = residual.split("] ", 1)
-        item4 = item4.strip('[')
-        item5, residual = residual.split('\" ', 1)
-        item6, residual = residual.split(" ", 1)
-        item7, residual = residual.split(" ", 1)
-        item8, residual = residual.split(' \"', 1)
-        item8 = item8.strip('\"')
-        item9 = residual[:-1]
-        return item1, item2, item3, item4, item5, item6, item7, item8, item9
+        ip_address, residual = log.split(" ", 1)
+        rfc_id, residual = residual.split(" ", 1)
+        user_id, residual = residual.split(" ", 1)
+        date_time_tz, residual = residual.split("] ", 1)
+        date_time_tz = date_time_tz.strip('[')
+        request_line, residual = residual.split('\" ', 1)
+        status_code, residual = residual.split(" ", 1)
+        response_size, residual = residual.split(" ", 1)
+        referrer, residual = residual.split(' \"', 1)
+        referrer = referrer.strip('\"')
+        user_agent = residual[:-1]
+        return (ip_address, rfc_id, user_id, date_time_tz, request_line, 
+            status_code, response_size, referrer, user_agent)
 
     def __init__(self, filename):
         with open(filename) as f:
             logs = f.read().splitlines()
             self.logs = [self.parse_log(log) for log in logs]
+        # convert to dataframe
+        self.to_dataframe()
 
     def to_dataframe(self):
-        pass
-
+        self.df = pd.DataFrame(self.logs)
+        self.df.columns = ["ip_address", "rfc_id", "user_id", "date_time_tz", "request_line",
+                          "status_code", "response_size", "referrer", "user_agent"]
+        
     def to_json(self):
         pass 
+
+
