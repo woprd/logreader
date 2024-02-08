@@ -7,16 +7,16 @@ with open("README.md", "r", encoding="utf-8") as fh:
 files_to_include = ['apache.log']
 
 setuptools.setup(
-    name="clfreader",  
+    name="logreader",  
     version="0.1.0",  
-    author="woprd",
-    author_email="hello@woprd.com",
+    author="woprd",# NOTE: real username
+    author_email="hello@woprd.com", # NOTE: not real email
     description="Reads Common Log Format files and does useful stuff with them",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/woprd/clfreader",   
+    url="https://github.com/woprd/logreader",   
     packages=setuptools.find_packages(),   
-    package_data={'clfreader': files_to_include},
+    package_data={'logreader': files_to_include},
     # include_package_data=True,
     classifiers=[
         "Programming Language :: Python :: 3",

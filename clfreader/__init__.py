@@ -45,3 +45,8 @@ class CLFReader:
         pass 
 
 
+
+class MongoDBReader:
+
+    pass 
+

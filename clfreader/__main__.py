@@ -1,5 +1,5 @@
 # File to run with python -m clfreader
-from clfreader import CLFReader
+from logreader import CLFReader
 from pathlib import Path
 import json 
 
