@@ -4,7 +4,7 @@ import os
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
-files_to_include = ['apache.log']
+files_to_include = ['apache.log', 'mongodb.log']
 
 setuptools.setup(
     name="logreader",  

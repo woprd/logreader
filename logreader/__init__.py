@@ -1,6 +1,7 @@
 """
 A class that reads a text file in Common Log Format and converts to different formats
 """
+import json
 import pandas as pd 
 
 class CLFReader:
@@ -41,12 +42,47 @@ class CLFReader:
         del self.df["date_time_tz"]
 
         
-    def to_json(self):
-        pass 
-
 
 
 class MongoDBReader:
 
-    pass 
+    def __init__(self, filename):
+        with open(filename) as f:
+            logs = f.read().splitlines()
+        self.logs = [json.loads(log) for log in logs]
+
+        new_logs = []
+        for log in self.logs:
+            datetime = log['t']['$date']
+            severity = log['s']
+            component = log['c']
+            id = log['id']
+            context = log['ctx']
+            message = log['msg']
+            address = log['attr']['address']
+            # TODO handle tags, truncated, size, if present
+
+            new_logs.append((datetime, severity, component, id, context, message, address))
+
+        self.logs = new_logs
+        self.to_dataframe()
+
+    def to_dataframe(self):
+        self.df = pd.DataFrame(self.logs)
+        self.df.columns = [
+            "datetime", "severity", "component", "id", "context", "message", "address"
+        ]
+        date_time_objs = pd.to_datetime(self.df.datetime)
+        self.df.set_index(date_time_objs, inplace=True)
+        del self.df["datetime"]
+
+    
+
+
+
+
+
+        
+
+
 
