@@ -59,10 +59,18 @@ class MongoDBReader:
             id = log['id']
             context = log['ctx']
             message = log['msg']
-            address = log['attr']['address']
-            # TODO handle tags, truncated, size, if present
+            try:
+                attr = log['attr'] # this is optional and higly variable 
+            except Exception: 
+                attr = None  
+            try:
+                tags = log['tags'] # this is optional and higly variable 
+            except Exception: 
+                tags = None  
 
-            new_logs.append((datetime, severity, component, id, context, message, address))
+            # TODO handle other tags, if present
+
+            new_logs.append((datetime, severity, component, id, context, message, attr, tags))
 
         self.logs = new_logs
         self.to_dataframe()
@@ -70,7 +78,7 @@ class MongoDBReader:
     def to_dataframe(self):
         self.df = pd.DataFrame(self.logs)
         self.df.columns = [
-            "datetime", "severity", "component", "id", "context", "message", "address"
+            "datetime", "severity", "component", "id", "context", "message", "attr", "tags"
         ]
         date_time_objs = pd.to_datetime(self.df.datetime)
         self.df.set_index(date_time_objs, inplace=True)
