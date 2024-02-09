@@ -49,7 +49,13 @@ class MongoDBReader:
     def __init__(self, filename):
         with open(filename) as f:
             logs = f.read().splitlines()
-        self.logs = [json.loads(log) for log in logs]
+
+        self.logs = []
+        for log in logs: 
+            try:
+                self.logs.append(json.loads(log))
+            except Exception:
+                print("line containin invalid json")
 
         new_logs = []
         for log in self.logs:
