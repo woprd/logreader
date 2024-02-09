@@ -58,7 +58,10 @@ class MongoDBReader:
             component = log['c']
             id = log['id']
             context = log['ctx']
-            message = log['msg']
+            try:
+                message = log['msg']
+            except Exception: 
+                attr = None  
             try:
                 attr = log['attr'] # this is optional and higly variable 
             except Exception: 
