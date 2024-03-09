@@ -6,7 +6,6 @@ Reads files and converts various log files into something useful (e.g. pandas da
 
 - [MongoDB logs](https://www.mongodb.com/docs/manual/reference/log-messages/)
 
-![Under Construction](https://media.tenor.com/MRCIli40TYoAAAAi/under-construction90s-90s.gif)
 
 ## Installation 
 
