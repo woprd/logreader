@@ -1,6 +1,6 @@
 # logreader
 
-Ever wanted a tool that converts various web log files into something useful (e.g. pandas dataframes) for each of analyses? Me too.
+Ever wanted a tool that converts various web log files into something useful (e.g. pandas dataframes) for ease of analyses? Me too.
 
 Ever expanding list of log formats is:
 
